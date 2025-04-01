@@ -26,7 +26,7 @@ export default function Contact() {
 
     try {
       const response = await fetch(
-        "you have to paste your form submit url here",
+        "https://getform.io/f/bolmwxja",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
