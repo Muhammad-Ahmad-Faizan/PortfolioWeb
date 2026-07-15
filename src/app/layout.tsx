@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ClientLayout from "@/components/layouts/client-layout";
+import Nav from "@/components/layout/nav";
+import Footer from "@/components/layout/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Muhammad Ahmad Faizan | Data Scientist",
+  title: "Muhammad Ahmad Faizan | AI & Backend Engineer",
   description:
-    "Data Scientist specializing in Python, SQL, data analysis, and machine learning with expertise in financial analysis and predictive modeling",
+    "Production AI systems for teams that need reliability, not demos. AI & Backend Engineer specializing in agentic workflows, RAG pipelines, and automation.",
   icons: {
     icon: [
       {
@@ -24,6 +25,12 @@ export const metadata: Metadata = {
         href: "/technology.png",
       },
     ],
+  },
+  openGraph: {
+    title: "Muhammad Ahmad Faizan | AI & Backend Engineer",
+    description:
+      "Production AI systems for teams that need reliability, not demos.",
+    type: "website",
   },
 };
 
@@ -35,9 +42,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-950 text-white min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#12110F] text-[#F5F1EA] min-h-screen`}
       >
-        <ClientLayout>{children}</ClientLayout>
+        <Nav />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );
