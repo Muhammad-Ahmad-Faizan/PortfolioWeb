@@ -1,18 +1,21 @@
-import Sidebar from "@/components/ui/sidebar";
-import Hero from "@/components/sections/hero";
-import TechStack from "@/components/sections/tech-stack";
-import Projects from "@/components/sections/projects";
-import Footer from "@/components/ui/footer";
+import HomeHero from "@/components/sections/home-hero";
+import FeaturedProjects from "@/components/sections/featured-projects";
+import EngineeringPrinciples from "@/components/sections/engineering-principles";
+import CurrentFocus from "@/components/sections/current-focus";
+import ExperienceTimeline from "@/components/sections/experience-timeline";
+import HomeTechStack from "@/components/sections/home-tech-stack";
+import FeaturedNotes from "@/components/sections/featured-notes";
+
 export default function Home() {
   return (
-    <main className="max-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-      <Sidebar />
-      <div className="w-full">
-        <Hero />
-        <TechStack />
-        <Projects />
-        <Footer />
-      </div>
-    </main>
+    <>
+      <HomeHero />
+      <FeaturedProjects />
+      <EngineeringPrinciples />
+      <CurrentFocus />
+      <ExperienceTimeline />
+      <HomeTechStack />
+      <FeaturedNotes />
+    </>
   );
 }
