@@ -42,18 +42,18 @@ export default function AboutPage() {
             <span>About</span>
           </div>
           <div className="flex items-center justify-between gap-4 md:gap-6 flex-wrap">
-  <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-[#F5F1EA]">
-    About {siteConfig.name}
-  </h1>
-  <Link
-    href="/muhammad-ahmad-faizan-cv.pdf"
-    download
-    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[rgba(245,241,234,0.15)] text-[#F5F1EA] text-sm font-medium hover:border-[#E8734A] hover:text-[#E8734A] transition-all duration-200 shrink-0"
-  >
-    <Download size={16} strokeWidth={1.5} />
-    Download CV
-  </Link>
-</div>
+            <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-[#F5F1EA]">
+              About {siteConfig.name}
+            </h1>
+            <Link
+              href="/muhammad-ahmad-faizan-cv.pdf"
+              download
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[rgba(245,241,234,0.15)] text-[#F5F1EA] text-sm font-medium hover:border-[#E8734A] hover:text-[#E8734A] transition-all duration-200 shrink-0"
+            >
+              <Download size={16} strokeWidth={1.5} />
+              Download CV
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-16">
@@ -67,7 +67,6 @@ export default function AboutPage() {
                 height={400}
                 className="w-full h-auto object-cover"
               />
-             
             </div>
           </div>
 
@@ -94,7 +93,7 @@ export default function AboutPage() {
               </p>
 
               <p>
-                I completed my Bachelor's degree in Software Engineering at
+                I completed my Bachelor&apos;s degree in Software Engineering at
                 National Textile University, Faisalabad. During my academic
                 journey, I worked with local and international clients,
                 developing AI-powered applications, backend systems, intelligent
@@ -205,12 +204,12 @@ export default function AboutPage() {
               <strong className="text-[#F5F1EA]">
                 National Textile University, Faisalabad
               </strong>
-              , where I completed my Bachelor's degree in Software Engineering.
-              The program provided a strong foundation in software engineering
-              principles, algorithms, data structures, databases, software
-              architecture, operating systems, computer networks, software
-              testing, and modern application development, preparing me to build
-              scalable, real-world software systems.
+              , where I completed my Bachelor&apos;s degree in Software
+              Engineering. The program provided a strong foundation in software
+              engineering principles, algorithms, data structures, databases,
+              software architecture, operating systems, computer networks,
+              software testing, and modern application development, preparing me
+              to build scalable, real-world software systems.
             </p>
 
             <p>
@@ -248,10 +247,11 @@ export default function AboutPage() {
         {/* CTA */}
         <div className="bg-gradient-to-r from-[#E8734A]/10 to-transparent border border-[rgba(245,241,234,0.08)] rounded-lg p-6 md:p-8">
           <h2 className="text-xl font-semibold text-[#F5F1EA] mb-2">
-            Let{"'"}s Build Something Together
+            Let&apos;s Build Something Together
           </h2>
+
           <p className="text-[#A39C90] text-sm mb-4 max-w-lg">
-            Have a project in mind? Let{"'"}s discuss how we can architect and
+            Have a project in mind? Let&apos;s discuss how we can architect and
             build it.
           </p>
           <Link
