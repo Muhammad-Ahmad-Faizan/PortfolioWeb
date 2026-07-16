@@ -175,7 +175,7 @@ export default function AboutPage() {
                     Use AI where it creates meaningful impact.
                   </strong>{" "}
                   Artificial Intelligence should solve real business
-                  problems—not be added simply because it's popular.
+                  problems—not be added simply because it&apos;s popular.
                 </span>
               </li>
 
