@@ -61,7 +61,7 @@ export default function AboutPage() {
           <div className="md:col-span-1">
             <div className="  overflow-hidden">
               <Image
-                src="/profile.jpg"
+                src="/profile.png"
                 alt={siteConfig.name}
                 width={400}
                 height={400}
