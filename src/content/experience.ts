@@ -78,7 +78,7 @@ export const education: ExperienceEntry[] = [
     type: "education",
 
     summary:
-      "Pursuing a Bachelor's degree in Software Engineering with a strong foundation in software design, backend development, databases, cloud technologies, artificial intelligence, machine learning, and modern software engineering practices. The program emphasizes the complete software development lifecycle—from requirements analysis and system design to development, testing, deployment, and maintenance.",
+      "Completed a Bachelor's degree in Software Engineering with a strong foundation in software design, backend development, databases, cloud technologies, artificial intelligence, machine learning, and modern software engineering practices. The program emphasizes the complete software development lifecycle—from requirements analysis and system design to development, testing, deployment, and maintenance.",
 
     responsibilities: [
       "Built strong foundations in software engineering principles, object-oriented programming, data structures, algorithms, operating systems, computer networks, database systems, and software architecture.",
