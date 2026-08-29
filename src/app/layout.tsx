@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/layout/nav";
+import { Analytics } from "@vercel/analytics/next"
 import Footer from "@/components/layout/footer";
 
 const geistSans = Geist({
@@ -47,6 +48,7 @@ export default function RootLayout({
         <Nav />
         <main className="min-h-screen">{children}</main>
         <Footer />
+                <Analytics /> 
       </body>
     </html>
   );
