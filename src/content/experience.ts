@@ -3,21 +3,24 @@ import { ExperienceEntry } from "@/types";
 export const workExperiences: ExperienceEntry[] = [
   {
     id: "freelance-current",
-    role: "AI & Backend Engineer",
-    organization: "Freelance (Local & International Clients)",
+    role: "Software Engineer",
+    organization: "Freelance — Clients in USA, UAE, France & Pakistan",
     period: "Sep 2024 — Present",
     type: "freelance",
 
     summary:
-      "Designing and developing AI-powered applications, backend systems, intelligent automation solutions, and scalable APIs for clients across multiple industries.",
+      "Designing, building and shipping web applications, backend systems, APIs and AI-powered automation for clients across multiple industries.",
 
    responsibilities: [
-  "Engineered AI-powered Shopify marketing automation workflows using Zapier and Klaviyo, including customer segmentation, welcome emails, abandoned cart recovery, product recommendations, and follow-up campaigns.",
+  "Rebuilt a UAE visa & residency consultancy's website from WordPress to Next.js with 8-language support (incl. Arabic RTL), an admin CMS for publishing articles, and automated translation via GitHub Actions.",
+  "Engineered AI-powered Shopify marketing automation workflows for a US-based store owner using Zapier and Klaviyo, including customer segmentation, welcome emails, abandoned cart recovery, product recommendations, and follow-up campaigns.",
   "Developed backend APIs and PostgreSQL database architecture for an international Django-based e-commerce platform while collaborating with a distributed development team.",
-  "Built financial modeling and forecasting solutions for business reporting, revenue analysis, expense tracking, and profit/loss forecasting for North Steel."
+  "Built financial modeling and forecasting solutions for business reporting, revenue analysis, expense tracking, and profit/loss forecasting for a steel fabrication company \u2014 a financial model with a KPI dashboard, project pipeline and what-if simulator in Excel."
 ],
     techStack: [
       "Python",
+      "TypeScript",
+      "Next.js",
       "FastAPI",
       "Django",
       "PostgreSQL",

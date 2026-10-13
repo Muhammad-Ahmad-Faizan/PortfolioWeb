@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, FolderKanban } from "lucide-react";
-import { projects, projectCategories } from "@/content/projects";
+import { FolderKanban } from "lucide-react";
+import ProjectCard from "@/components/ui/project-card";
+import { projects, projectCategories, matchesFilter } from "@/content/projects";
 
 export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -12,7 +12,7 @@ export default function ProjectsPage() {
   const filteredProjects =
     activeCategory === "All"
       ? projects
-      : projects.filter((p) => p.category === activeCategory);
+      : projects.filter((p) => matchesFilter(p, activeCategory));
 
   return (
     <div className="pt-24 md:pt-32 pb-16 md:pb-24">
@@ -21,14 +21,15 @@ export default function ProjectsPage() {
         <div className="mb-10 md:mb-14">
           <div className="flex items-center gap-2 text-[#5FA8A0] font-mono text-xs uppercase tracking-wider mb-3">
             <FolderKanban size={14} strokeWidth={1.5} />
-            <span>Portfolio</span>
+            <span>Work</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-[#F5F1EA] mb-4">
-            Projects & Case Studies
+            Work & Case Studies
           </h1>
           <p className="text-[#A39C90] text-base md:text-lg max-w-2xl leading-relaxed">
-            Real systems built for production use. Each project includes the
-            problem, architecture, challenges, and results.
+            Client projects and products I&apos;ve built end to end. Each case
+            study covers the problem, architecture, key decisions, testing and
+            results.
           </p>
         </div>
 
@@ -66,48 +67,7 @@ export default function ProjectsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
               >
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="group block bg-[#1C1A17] border border-[rgba(245,241,234,0.08)] rounded-lg p-6 hover:bg-[#252220] transition-all duration-200 h-full"
-                >
-                  {/* Category */}
-                  <div className="inline-flex items-center gap-1.5 bg-[#252220] rounded-full px-2.5 py-1 mb-4">
-                    <span className="text-xs font-mono text-[#5FA8A0]">
-                      {project.category}
-                    </span>
-                  </div>
-
-                  <h2 className="text-lg font-semibold text-[#F5F1EA] group-hover:text-[#E8734A] transition-colors mb-2">
-                    {project.title}
-                  </h2>
-
-                  <p className="text-sm text-[#A39C90] leading-relaxed mb-4 line-clamp-3">
-                    {project.summary}
-                  </p>
-
-                  {/* Tech pills */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {project.techStack.slice(0, 4).map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs font-mono text-[#5FA8A0] bg-[#252220] rounded-full px-2 py-0.5"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.techStack.length > 4 && (
-                      <span className="text-xs font-mono text-[#A39C90]">
-                        +{project.techStack.length - 4}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* CTA */}
-                  <div className="inline-flex items-center gap-1.5 text-sm text-[#E8734A] font-medium">
-                    <span>View Case Study</span>
-                    <ArrowUpRight size={14} strokeWidth={1.5} />
-                  </div>
-                </Link>
+                <ProjectCard project={project} headingLevel="h2" />
               </motion.div>
             ))}
           </motion.div>

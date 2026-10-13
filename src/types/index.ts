@@ -8,8 +8,20 @@ export interface Project {
   slug: string;
   title: string;
   summary: string;
-  category: "AI" | "Backend" | "Automation" | "Web";
+  category: "AI" | "Backend" | "Automation" | "Web" | "Voice AI" | "Data & Analytics";
+  /** Set for real client work — shows the "Client" tag (+ country) and appears under the Client Work filter */
+  client?: { country?: string; code?: "AE" | "FR" | "US" | "PK" };
   isFeatured: boolean;
+  /** One headline result shown on cards, e.g. "Docker image 3.2 GB → 850 MB" */
+  highlight?: string;
+  /** Card image, e.g. "/projects/covers/my-project.webp" (falls back to a placeholder if missing) */
+  cover?: string;
+  status?: "Shipped" | "In progress" | "Hackathon";
+  /** When the project ran, e.g. "Sep – Oct 2026" (shown on client work) */
+  period?: string;
+  /** Client work shown without names, logos or links */
+  confidential?: boolean;
+  links?: { live?: string; github?: string; apiDocs?: string; article?: string };
   techStack: string[];
   media?: ProjectMedia[];
   sections: {
@@ -21,6 +33,8 @@ export interface Project {
     techStack: string[];
     challenges: { title: string; description: string }[];
     lessonsLearned: string[];
+    testing?: string[];
+    whatIdChange?: string[];
     results: string;
     relatedProjects: string[];
   };

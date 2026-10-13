@@ -136,3 +136,56 @@ code, pre, .font-mono {
     font-size: 16px;
   }
 }
+/* ---------- Effects ---------- */
+
+/* Cursor spotlight on project cards */
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(232, 115, 74, 0.09), transparent 45%);
+}
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* Faint engineering grid behind the hero, fading out at the edges */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(245, 241, 234, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 241, 234, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 30%, transparent 75%);
+}
+
+/* Infinite marquee (clients strip) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+.marquee-mask:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Respect visitors who turn off motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee { animation: none; }
+}

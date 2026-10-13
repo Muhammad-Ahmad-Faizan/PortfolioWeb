@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink, Lock, FileCode2, BookOpen, CalendarDays, TrendingUp, Briefcase } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { projects } from "@/content/projects";
 import { siteConfig } from "@/content/site-config";
-import Image from "next/image";
+import SmartImage from "@/components/ui/smart-image";
+import Flag from "@/components/ui/flag";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -19,7 +21,7 @@ export async function generateMetadata({ params }: Props) {
   if (!project) return { title: "Project Not Found" };
 
   return {
-    title: `${project.title} | ${siteConfig.name}`,
+    title: project.title,
     description: project.summary,
   };
 }
@@ -42,14 +44,32 @@ export default async function ProjectDetailPage({ params }: Props) {
           className="inline-flex items-center gap-1.5 text-sm text-[#A39C90] hover:text-[#E8734A] transition-colors mb-8"
         >
           <ArrowLeft size={14} strokeWidth={1.5} />
-          <span>Back to Portfolio</span>
+          <span>Back to all work</span>
         </Link>
 
         <div className="mb-12 md:mb-16">
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex flex-wrap items-center gap-2 mb-4">
             <span className="text-xs font-mono text-[#5FA8A0] bg-[#252220] rounded-full px-2.5 py-1">
               {project.category}
             </span>
+            {project.client && (
+              <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-mono text-[#F5F1EA] bg-[#E8734A]/10 border border-[#E8734A]/30">
+                <Briefcase size={11} className="text-[#E8734A]" />
+                Client
+                {project.client.country && (
+                  <>
+                    <span className="text-[#A39C90]">&middot;</span>
+                    <Flag code={project.client.code} />
+                    {project.client.country}
+                  </>
+                )}
+              </span>
+            )}
+            {project.period && (
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#A39C90] border border-[rgba(245,241,234,0.12)] rounded-full px-2.5 py-1">
+                <CalendarDays size={12} /> {project.period}
+              </span>
+            )}
           </div>
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-[#F5F1EA] mb-3">
             {project.title}
@@ -57,6 +77,48 @@ export default async function ProjectDetailPage({ params }: Props) {
           <p className="text-lg text-[#A39C90] max-w-2xl leading-relaxed">
             {project.summary}
           </p>
+
+          {project.highlight && (
+            <div className="inline-flex items-center gap-2 mt-4 text-sm text-[#F5F1EA] bg-[#5FA8A0]/10 border border-[#5FA8A0]/30 rounded-full px-3 py-1">
+              <TrendingUp size={14} className="text-[#5FA8A0]" />
+              {project.highlight}
+            </div>
+          )}
+
+          {project.confidential && (
+            <div className="flex items-start gap-3 mt-5 max-w-2xl bg-[#17150F] border border-[rgba(245,241,234,0.08)] rounded-lg p-4">
+              <Lock size={16} className="text-[#E8734A] mt-0.5 shrink-0" />
+              <p className="text-sm text-[#A39C90]">
+                Client name, branding and live link are withheld for privacy, and identifying details are removed from screenshots. Happy to walk
+                through this project on a call.
+              </p>
+            </div>
+          )}
+
+          {project.links && (
+            <div className="flex flex-wrap gap-3 mt-5">
+              {project.links.live && (
+                <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#E8734A] hover:bg-[#E8734A]/90 text-[#12110F] px-4 py-2 rounded-full text-sm font-medium">
+                  <ExternalLink size={14} /> Live demo
+                </a>
+              )}
+              {project.links.github && (
+                <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-[rgba(245,241,234,0.15)] hover:border-[#E8734A] text-[#F5F1EA] px-4 py-2 rounded-full text-sm">
+                  <FaGithub size={14} /> Source code
+                </a>
+              )}
+              {project.links.apiDocs && (
+                <a href={project.links.apiDocs} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-[rgba(245,241,234,0.15)] hover:border-[#E8734A] text-[#F5F1EA] px-4 py-2 rounded-full text-sm">
+                  <FileCode2 size={14} /> API docs
+                </a>
+              )}
+              {project.links.article && (
+                <Link href={project.links.article} className="inline-flex items-center gap-2 border border-[rgba(245,241,234,0.15)] hover:border-[#E8734A] text-[#F5F1EA] px-4 py-2 rounded-full text-sm">
+                  <BookOpen size={14} /> Read the write-up
+                </Link>
+              )}
+            </div>
+          )}
           <div className="flex flex-wrap gap-2 mt-4">
             {project.techStack.map((tech) => (
               <span
@@ -69,12 +131,23 @@ export default async function ProjectDetailPage({ params }: Props) {
           </div>
         </div>
 
+        {project.cover && (
+          <SmartImage
+            src={project.cover}
+            alt={`${project.title} preview`}
+            label={project.title}
+            priority
+            sizes="(max-width: 1200px) 100vw, 1150px"
+            className="aspect-[21/9] rounded-xl border border-[rgba(245,241,234,0.08)] mb-12 md:mb-16"
+          />
+        )}
+
         <div className="max-w-4xl space-y-12 md:space-y-16">
           <Section title="Overview">
             <p className="text-[#A39C90] leading-relaxed">{sections.overview}</p>
           </Section>
 
-          <Section title="Business Problem">
+          <Section title="The Problem">
             <p className="text-[#A39C90] leading-relaxed">{sections.businessProblem}</p>
           </Section>
 
@@ -109,13 +182,12 @@ export default async function ProjectDetailPage({ params }: Props) {
                 {project.media.map((item, i) => (
                   <div key={i} className="bg-[#17150F] border border-[rgba(245,241,234,0.08)] rounded-lg overflow-hidden">
                   {item.type === "image" ? (
-                      <Image
+                      <SmartImage
                         src={item.src}
                         alt={item.caption}
-                        width={600}
-                        height={400}
-                        className="w-full h-auto object-cover"
-                        loading="lazy"
+                        label={item.caption}
+                        className="aspect-[3/2]"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
                       <div className="aspect-video bg-[#252220] rounded-lg overflow-hidden">
@@ -151,7 +223,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             </div>
           </Section>
 
-          <Section title="Engineering Challenges">
+          <Section title="Key Decisions & Challenges">
             <div className="space-y-4">
               {sections.challenges.map((challenge, i) => (
                 <div
@@ -164,6 +236,19 @@ export default async function ProjectDetailPage({ params }: Props) {
               ))}
             </div>
           </Section>
+
+          {sections.testing && sections.testing.length > 0 && (
+            <Section title="Testing & Quality">
+              <ul className="space-y-2">
+                {sections.testing.map((t, i) => (
+                  <li key={i} className="flex items-start gap-2 text-[#A39C90]">
+                    <span className="text-[#5FA8A0] mt-1 flex-shrink-0">&#10003;</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          )}
 
           <Section title="Lessons Learned">
             <ul className="space-y-2">
@@ -181,6 +266,19 @@ export default async function ProjectDetailPage({ params }: Props) {
               <p className="text-[#F5F1EA] leading-relaxed">{sections.results}</p>
             </div>
           </Section>
+
+          {sections.whatIdChange && sections.whatIdChange.length > 0 && (
+            <Section title="What I'd Do Differently">
+              <ul className="space-y-2">
+                {sections.whatIdChange.map((t, i) => (
+                  <li key={i} className="flex items-start gap-2 text-[#A39C90]">
+                    <span className="text-[#E8734A] mt-1 flex-shrink-0">&#8635;</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          )}
 
           {sections.relatedProjects.length > 0 && (
             <Section title="Related Projects">
@@ -207,18 +305,30 @@ export default async function ProjectDetailPage({ params }: Props) {
 
           <div className="bg-gradient-to-r from-[#E8734A]/10 to-transparent border border-[rgba(245,241,234,0.08)] rounded-lg p-6 md:p-8">
             <h2 className="text-xl font-semibold text-[#F5F1EA] mb-2">
-              Let{"'"}s Build Something Similar
+              Need something similar?
             </h2>
             <p className="text-[#A39C90] text-sm mb-4 max-w-lg">
-              Have a project in mind? Let{"'"}s discuss how we can architect
-              and build it together.
+              I can build a system like this for your business &mdash; tell me what
+              you need and I&apos;ll reply with a plan and a quote.
             </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-[#E8734A] hover:bg-[#E8734A]/90 text-[#12110F] px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
-            >
-              <span>Discuss Your Project</span>
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-[#E8734A] hover:bg-[#E8734A]/90 text-[#12110F] px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
+              >
+                <span>Discuss a similar project &rarr;</span>
+              </Link>
+              {siteConfig.bookingUrl && (
+                <a
+                  href={siteConfig.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-[rgba(245,241,234,0.15)] hover:border-[#E8734A] text-[#F5F1EA] px-4 py-2 rounded-full text-sm"
+                >
+                  <CalendarDays size={14} /> Book a call
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>

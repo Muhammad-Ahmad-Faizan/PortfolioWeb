@@ -3,7 +3,8 @@ import { Mail, Sparkles } from "lucide-react";
 import { siteConfig } from "@/content/site-config";
 import { navLinks } from "@/content/nav-links";
 import { FaWhatsapp } from "react-icons/fa";
-import { Download } from "lucide-react";
+import { FaXTwitter } from "react-icons/fa6";
+import { FileText as Download } from "lucide-react";
 
 export default function Footer() {
   const ctaHeading = "Let\u2019s Build Something Together";
@@ -25,6 +26,9 @@ export default function Footer() {
             </Link>
             <p className="text-sm text-[#A39C90] max-w-xs leading-relaxed">
               {siteConfig.description}
+            </p>
+            <p className="text-xs font-mono text-[#A39C90]">
+              <span className="text-[#5FA8A0]">Currently building:</span> {siteConfig.currentlyBuilding}
             </p>
             <div className="flex items-center gap-4">
               <a
@@ -71,6 +75,15 @@ export default function Footer() {
                 </svg>
               </a>
               <a
+                href={siteConfig.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#A39C90] hover:text-[#F5F1EA] transition-colors"
+                aria-label="X (Twitter)"
+              >
+                <FaXTwitter size={16} />
+              </a>
+              <a
                 href={`mailto:${siteConfig.email}`}
                 className="text-[#A39C90] hover:text-[#F5F1EA] transition-colors"
                 aria-label="Email"
@@ -87,9 +100,10 @@ export default function Footer() {
                 <FaWhatsapp size={16} />
               </a>
               <a
-                href="/muhammad-ahmad-faizan-cv.pdf"
-                download
-                aria-label="Download CV"
+                href={siteConfig.cvPath}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Resume (PDF)"
                 className="text-[#A39C90] hover:text-[#E8734A] transition-colors duration-200"
               >
                 <Download size={20} strokeWidth={1.5} />
@@ -100,8 +114,8 @@ export default function Footer() {
           {/* Navigation */}
           <div className="space-y-4">
             <h3 className="text-sm font-semibold text-[#F5F1EA]">Navigation</h3>
-            <ul className="space-y-2">
-              {navLinks.map((link) => (
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
+              {[...navLinks, { href: "/contact", label: "Contact", icon: "" }].map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -120,7 +134,7 @@ export default function Footer() {
               {ctaHeading}
             </h3>
             <p className="text-sm text-[#A39C90] leading-relaxed">
-              Discuss your next AI project or automation pipeline.
+              Web app, backend, mobile app or AI agent &mdash; tell me what you&apos;re building.
             </p>
             <Link
               href="/contact"
@@ -134,9 +148,9 @@ export default function Footer() {
 
         <div className="mt-8 pt-2 pb-2 border-t border-[rgba(245,241,234,0.08)] flex flex-col md:flex-row items-center justify-between gap-2">
           <p className="text-xs text-[#A39C90]">
-            &copy; 2025 {siteConfig.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
-          <p className="text-xs text-[#A39C90]">{siteConfig.location}</p>
+          <p className="text-xs text-[#A39C90]">{siteConfig.locationLine} &middot; UTC+5</p>
         </div>
       </div>
     </footer>

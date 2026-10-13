@@ -1,35 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { User, Sparkles } from "lucide-react";
+import type { Metadata } from "next";
 import { siteConfig } from "@/content/site-config";
-import { Download } from "lucide-react";
+import { FileText, MapPin, Award, ArrowRight } from "lucide-react";
 
-const problemSolvingSteps = [
-  {
-    step: 1,
-    title: "Understand the Business Problem",
-    description:
-      "I start by understanding the client's goals, users, and business challenges before selecting technologies or designing the solution.",
-  },
-  {
-    step: 2,
-    title: "Design Scalable Architecture",
-    description:
-      "I design clean system architectures with clear data flow, modular components, and scalable backend services before implementation begins.",
-  },
-  {
-    step: 3,
-    title: "Build Reliable Solutions",
-    description:
-      "I focus on clean code, maintainable APIs, validation, security, testing, and robust integrations to ensure dependable software.",
-  },
-  {
-    step: 4,
-    title: "Improve Through Feedback",
-    description:
-      "Every project evolves through testing, client feedback, performance monitoring, and continuous improvements to deliver long-term value.",
-  },
-];
+export const metadata: Metadata = {
+  title: "About",
+  description: "Software engineer from Faisalabad, Pakistan, building web apps, backend systems, mobile apps and AI products for clients worldwide.",
+};
 
 export default function AboutPage() {
   return (
@@ -46,12 +25,13 @@ export default function AboutPage() {
               About {siteConfig.name}
             </h1>
             <Link
-              href="/muhammad-ahmad-faizan-cv.pdf"
-              download
+              href={siteConfig.cvPath}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[rgba(245,241,234,0.15)] text-[#F5F1EA] text-sm font-medium hover:border-[#E8734A] hover:text-[#E8734A] transition-all duration-200 shrink-0"
             >
-              <Download size={16} strokeWidth={1.5} />
-              Download CV
+              <FileText size={16} strokeWidth={1.5} />
+              View Resume
             </Link>
           </div>
         </div>
@@ -61,8 +41,8 @@ export default function AboutPage() {
           <div className="md:col-span-1">
             <div className="  overflow-hidden">
               <Image
-                src="/Profile.png"
-                alt={siteConfig.name}
+                src="/Profile.jpg"
+                alt={`${siteConfig.name}, software engineer`}
                 width={400}
                 height={400}
                 className="w-full h-auto object-cover"
@@ -75,67 +55,39 @@ export default function AboutPage() {
             <h2 className="text-2xl font-semibold text-[#F5F1EA] mb-4">
               About Me
             </h2>
+            <div className="flex items-center gap-2 text-sm text-[#A39C90] mb-4">
+              <MapPin size={14} strokeWidth={1.5} className="text-[#E8734A]" />
+              <span>{siteConfig.locationLine} &middot; UTC+5</span>
+            </div>
             <div className="space-y-4 text-[#A39C90] leading-relaxed">
               <p>
-                I build intelligent software that combines Artificial
-                Intelligence, backend engineering, and automation to solve real
-                business problems. My work focuses on AI-powered applications,
-                Retrieval-Augmented Generation (RAG), AI agents, scalable
-                backend systems, and workflow automation that deliver practical
-                value.
+                I&apos;m a software engineer who builds complete products: web applications, backend APIs, mobile apps and AI-powered
+                systems, from the first architecture sketch to production
+                deployment.
               </p>
 
               <p>
-                I believe successful AI products are built on more than great
-                models. Clean architecture, reliable APIs, scalable databases,
-                thoughtful system design, and maintainable code are equally
-                important for creating software that businesses can depend on.
+                I work across AI engineering, automation, web development and
+                backend systems, from RAG assistants, AI agents and automated
+                workflows to web apps, APIs and mobile apps. Whatever the
+                project, I focus on clean code, tested systems and using AI
+                where it solves a real problem, not because it&apos;s trendy.
               </p>
 
               <p>
-                I completed my Bachelor&apos;s degree in Software Engineering at
-                National Textile University, Faisalabad. During my academic
-                journey, I worked with local and international clients,
-                developing AI-powered applications, backend systems, intelligent
-                automation, and modern software solutions that addressed real
-                business challenges while strengthening both my technical and
-                communication skills.
+                I hold a Bachelor&apos;s degree in Software Engineering from
+                National Textile University, Faisalabad. Alongside my studies, I
+                delivered projects for clients in the USA, UAE, France and Pakistan,
+                including a multilingual website for a UAE visa
+                consultancy, Shopify marketing automation for a US store and backend work for an
+                international e-commerce platform.
               </p>
 
               <p>
-                Today, my primary interests include AI Engineering, Backend
-                Development, Large Language Models (LLMs), Retrieval-Augmented
-                Generation (RAG), AI Agents, workflow automation, and building
-                production-ready software systems.
+                I work remotely with teams and founders worldwide, and I&apos;m
+                open to freelance projects, contracts and full-time roles.
               </p>
             </div>
-          </div>
-        </div>
-
-        {/* How I Solve Problems */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-semibold text-[#F5F1EA] mb-8">
-            How I Solve Problems
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {problemSolvingSteps.map((step) => (
-              <div
-                key={step.step}
-                className="bg-[#1C1A17] border border-[rgba(245,241,234,0.08)] rounded-lg p-5"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="flex items-center justify-center w-8 h-8 bg-[#252220] rounded-full text-sm font-mono text-[#E8734A] font-bold">
-                    {step.step}
-                  </span>
-                  <h3 className="text-base font-semibold text-[#F5F1EA]">
-                    {step.title}
-                  </h3>
-                </div>
-                <p className="text-sm text-[#A39C90] leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
 
@@ -227,7 +179,7 @@ export default function AboutPage() {
             <p>
               I also completed an{" "}
               <strong className="text-[#F5F1EA]">
-                AI & Python Development Internship at SoftBeck Limited
+                Python Developer Internship at SoftBeck Limited
               </strong>
               , where I contributed to AI integrations, automation tools,
               backend development, and production-focused software while
@@ -235,14 +187,29 @@ export default function AboutPage() {
             </p>
 
             <p>
-              Today, I continue expanding my expertise by building AI-powered
-              SaaS products, backend services, RAG applications, AI agents,
-              workflow automation systems, and modern software solutions while
-              continuously exploring new technologies across Artificial
-              Intelligence and Software Engineering.
+              Today I build full products end to end &mdash; most recently a
+              multilingual Next.js platform with an admin CMS for a UAE
+              consultancy, a root-cause investigation agent, and Revenue OS, a
+              multi-tenant B2B sales platform &mdash; while continuing to grow
+              as a software engineer.
             </p>
           </div>
         </div>
+
+        {/* Certifications teaser */}
+        <Link
+          href="/certifications"
+          className="group flex items-center justify-between gap-4 bg-[#1C1A17] border border-[rgba(245,241,234,0.08)] hover:border-[#E8734A]/40 rounded-lg p-5 mb-8 transition-colors"
+        >
+          <div className="flex items-center gap-3">
+            <Award size={20} strokeWidth={1.5} className="text-[#E8734A]" />
+            <div>
+              <p className="text-sm font-semibold text-[#F5F1EA]">Certifications &amp; Achievements</p>
+              <p className="text-xs text-[#A39C90]">Courses, badges and hackathons</p>
+            </div>
+          </div>
+          <ArrowRight size={16} className="text-[#A39C90] group-hover:text-[#E8734A] transition-colors" />
+        </Link>
 
         {/* CTA */}
         <div className="bg-gradient-to-r from-[#E8734A]/10 to-transparent border border-[rgba(245,241,234,0.08)] rounded-lg p-6 md:p-8">

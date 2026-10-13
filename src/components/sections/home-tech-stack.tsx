@@ -1,11 +1,10 @@
-import { techCategories } from "@/content/tech-stack";
+import { techCategories, coreStack } from "@/content/tech-stack";
 import {
   SiPython,
   SiTypescript,
   SiJavascript,
   SiDart,
   SiLangchain,
-  SiOpencv,
   SiPytorch,
   SiScikitlearn,
   SiHuggingface,
@@ -24,6 +23,16 @@ import {
   SiTailwindcss,
   SiFlutter,
   SiFramer,
+  SiDjango,
+  SiLaravel,
+  SiVuedotjs,
+  SiMysql,
+  SiSqlite,
+  SiPhp,
+  SiN8N,
+  SiZapier,
+  SiGooglecloud,
+  SiGit,
 } from "react-icons/si";
 
 const techIconMap: Record<string, React.ReactNode> = {
@@ -45,12 +54,21 @@ const techIconMap: Record<string, React.ReactNode> = {
   Vercel: <SiVercel size={14} />,
   "Next.js": <SiNextdotjs size={14} />,
   React: <SiReact size={14} />,
-  TailwindCSS: <SiTailwindcss size={14} />,
+  "Tailwind CSS": <SiTailwindcss size={14} />,
+  Django: <SiDjango size={14} />,
+  Laravel: <SiLaravel size={14} />,
+  Vue: <SiVuedotjs size={14} />,
+  MySQL: <SiMysql size={14} />,
+  SQLite: <SiSqlite size={14} />,
+  PHP: <SiPhp size={14} />,
+  n8n: <SiN8N size={14} />,
+  Zapier: <SiZapier size={14} />,
+  "Google Cloud": <SiGooglecloud size={14} />,
+  Git: <SiGit size={14} />,
   Flutter: <SiFlutter size={14} />,
   "Framer Motion": <SiFramer size={14} />,
   PyTorch: <SiPytorch size={14} />,
   "Scikit-learn": <SiScikitlearn size={14} />,
-  OpenAI: <SiOpencv size={14} />,
 };
 
 export default function HomeTechStack() {
@@ -66,7 +84,22 @@ export default function HomeTechStack() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="bg-[#17150F] border border-[rgba(232,115,74,0.25)] rounded-lg p-5 mb-6">
+          <h3 className="text-xs font-mono uppercase tracking-wider text-[#E8734A] mb-3">Core stack</h3>
+          <div className="flex flex-wrap gap-2">
+            {coreStack.map((item) => (
+              <span
+                key={item}
+                className="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-mono text-[#F5F1EA] bg-[#252220] rounded-full"
+              >
+                <span className="text-[#E8734A]">{techIconMap[item] || null}</span>
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {techCategories.map((cat) => (
             <div
               key={cat.category}

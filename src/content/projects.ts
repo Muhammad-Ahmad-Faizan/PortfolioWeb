@@ -1,13 +1,15 @@
 import { Project } from "@/types";
+import { newProjects } from "./projects-new";
 
-export const projects: Project[] = [
+const existingProjects: Project[] = [
     {
       slug: "ai-customer-support-agent",
       title: "AI Customer Support Agent",
       summary:
         "LLM-powered support agent with conversation memory, tool-use capabilities, and grounded responses.",
       category: "AI",
-      isFeatured: true,
+      isFeatured: false,
+      highlight: "Handles ~80% of support queries without a human",
       techStack: [
         "Python",
         "LangChain",
@@ -145,7 +147,8 @@ export const projects: Project[] = [
     summary:
       "Retrieval-augmented Q&A system with citation-aware, grounded answers for internal knowledge bases.",
     category: "AI",
-    isFeatured: true,
+    isFeatured: false,
+    highlight: "92% grounded-answer accuracy \u00B7 1.8s latency",
     techStack: [
       "Python",
       "LangChain",
@@ -291,7 +294,7 @@ export const projects: Project[] = [
     summary:
       "Coordinated agents that decompose complex research tasks across specialized roles with a dark-themed React frontend.",
     category: "AI",
-    isFeatured: true,
+    isFeatured: false,
     techStack: [
       "Python",
       "LangGraph",
@@ -449,18 +452,22 @@ export const projects: Project[] = [
   },
   {
     slug: "deepfake-detection-system",
-    title: "Deepfake Detection System",
+    title: "Deepfake Detection Platform (Final Year Project)",
     summary:
-      "ConvNeXt-Tiny based 6-class deepfake classifier deployed on Hugging Face Spaces via Docker.",
+      "A live web platform that detects AI-manipulated media using a ConvNeXt-Tiny 6-class model, with accounts, payments and AI-generated explanations.",
     category: "AI",
-    isFeatured: false,
+    isFeatured: true,
+    highlight: "94% validation accuracy \u00B7 Docker image 3.2 GB \u2192 850 MB",
+    links: { live: "https://deep-fake.dev" },
     techStack: [
       "Python",
       "PyTorch",
       "ConvNeXt",
-      "Hugging Face",
+      "FastAPI",
+      "Next.js",
+      "PostgreSQL",
       "Docker",
-      "Gradio",
+      "Hugging Face",
     ],
         media: [
         {
@@ -486,11 +493,11 @@ export const projects: Project[] = [
       ],
     sections: {
       overview:
-        "Built a deepfake detection system using a ConvNeXt-Tiny architecture fine-tuned for 6-way classification across real and AI-generated face categories. The model is containerized with Docker and deployed on Hugging Face Spaces with a Gradio inference interface.",
+        "My final year project at National Textile University, built in a team of three: a live web platform (deep-fake.dev) for detecting manipulated media. A ConvNeXt-Tiny model fine-tuned for 6-way classification runs as a Dockerised model API on Hugging Face Spaces, behind a FastAPI backend and a Next.js frontend with user accounts, email OTP verification, Google sign-in, Stripe payments and AI-generated explanations of each result.",
       businessProblem:
         "Synthetic media generation has outpaced detection capabilities. Organizations need reliable tools to distinguish real photographs from AI-generated images across multiple generation methods (GANs, diffusion models, etc.).",
       solution:
-        "Fine-tuned a ConvNeXt-Tiny model on a curated dataset spanning 6 classes: real faces and 5 types of AI-generated faces. Applied aggressive data augmentation to improve generalization. Containerized the full inference pipeline with Docker for reproducible deployment on Hugging Face Spaces.",
+        "Fine-tuned a ConvNeXt-Tiny model on a curated dataset spanning 6 classes: real faces and 5 types of AI-generated faces, with aggressive data augmentation to improve generalization. The model is served from a Docker container on Hugging Face Spaces; a FastAPI backend handles uploads, authentication, payments and history in PostgreSQL, and a Next.js frontend shows predictions with confidence scores, Grad-CAM heatmaps and a plain-language explanation generated with Groq.",
       architectureDiagram: `<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
   <rect width="700" height="300" fill="#1C1A17" rx="12"/>
   <text x="350" y="28" fill="#F5F1EA" font-family="monospace" font-size="13" text-anchor="middle" font-weight="bold">Deepfake Detection — Pipeline</text>
@@ -524,7 +531,7 @@ export const projects: Project[] = [
   <!-- Deployment box -->
   <rect x="180" y="160" width="340" height="55" rx="8" fill="#252220" stroke="#A39C90" stroke-width="1.5" stroke-dasharray="4,3"/>
   <text x="350" y="182" fill="#F5F1EA" font-family="monospace" font-size="11" text-anchor="middle">Deployment: Docker → Hugging Face Spaces</text>
-  <text x="350" y="200" fill="#A39C90" font-family="monospace" font-size="10" text-anchor="middle">Gradio Inference Interface</text>
+  <text x="350" y="200" fill="#A39C90" font-family="monospace" font-size="10" text-anchor="middle">FastAPI + Next.js platform</text>
   
   <line x1="460" y1="105" x2="350" y2="160" stroke="#A39C90" stroke-width="1.5" stroke-dasharray="4,3"/>
 </svg>`,
@@ -532,16 +539,23 @@ export const projects: Project[] = [
         "6-class classification: Real vs. GAN, Diffusion, VAE, StyleGAN, and Other synthetic",
         "ConvNeXt-Tiny architecture optimized for inference speed",
         "Docker containerized for reproducible deployment",
-        "Gradio web interface for easy image upload and classification",
+        "Live web platform with upload, prediction history and Grad-CAM explanations",
+        "User accounts with email OTP verification (Resend) and Google sign-in",
+        "Stripe payments and AI-generated result explanations via Groq",
         "Data augmentation pipeline with random crops, flips, and color jitter",
       ],
       techStack: [
         "Python",
         "PyTorch",
         "ConvNeXt-Tiny",
-        "Hugging Face Transformers",
+        "Hugging Face Spaces",
         "Docker",
-        "Gradio",
+        "FastAPI",
+        "Next.js 14",
+        "PostgreSQL",
+        "Groq",
+        "Stripe",
+        "Resend",
         "Albumentations",
       ],
       challenges: [
@@ -578,6 +592,8 @@ export const projects: Project[] = [
       "Automated lead scoring and routing pipeline using n8n, Groq-hosted LLaMA 3.3 70B, Google Sheets, and Gmail.",
     category: "Automation",
     isFeatured: false,
+    highlight: "Lead response time 4 hours \u2192 under 5 minutes",
+    cover: "/projects/covers/ai-lead-qualification-system.webp",
     techStack: ["n8n", "Groq", "Python", "Google Sheets API", "Gmail API"],
        
     sections: {
@@ -691,6 +707,7 @@ export const projects: Project[] = [
       "Scraping pipeline with LLaMA-personalized emails and automated Gmail delivery.",
     category: "Automation",
     isFeatured: false,
+    highlight: "32% reply rate on a 500-prospect campaign",
     techStack: ["Python", "n8n", "Groq", "Gmail API", "BeautifulSoup"],
         media: [
         {
@@ -791,13 +808,18 @@ export const projects: Project[] = [
     slug: "shopify-email-marketing-automation",
     title: "Shopify Email Marketing Automation",
     summary:
-      "Zapier + Klaviyo lifecycle emails triggered by Shopify store events.",
+      "Zapier + Klaviyo lifecycle emails triggered by Shopify store events, built for a Shopify store owner in the USA.",
     category: "Automation",
+    client: { country: "USA", code: "US" },
     isFeatured: false,
+    confidential: true,
+    period: "Sep – Oct 2025",
+    highlight: "Recovered 12% of abandoned carts",
+    cover: "/projects/covers/shopify-email-marketing-automation.webp",
     techStack: ["Zapier", "Klaviyo", "Shopify API", "Python"],
     sections: {
       overview:
-        "Designed and implemented a lifecycle email marketing automation for a Shopify store, using Zapier to bridge Shopify events into Klaviyo for targeted email sequences. The system triggers personalized emails based on customer behavior: abandoned cart, post-purchase, win-back, and browse abandonment.",
+        "Designed and implemented a lifecycle email marketing automation for a US-based Shopify store owner, using Zapier to bridge Shopify events into Klaviyo for targeted email sequences. The system triggers personalized emails based on customer behavior: abandoned cart, post-purchase, win-back, and browse abandonment.",
       businessProblem:
         "E-commerce stores lose revenue from abandoned carts and inactive customers. Manual email campaigns are too slow for real-time behavioral triggers. Store owners need automated, event-driven email sequences that respond to customer actions within minutes.",
       solution:
@@ -891,7 +913,7 @@ export const projects: Project[] = [
     "An AI-powered recruitment platform that automates resume screening, candidate matching, and recruitment workflows using FastAPI, PostgreSQL, NLP, and intelligent filtering.",
 
   category: "AI",
-  isFeatured: true,
+  isFeatured: false,
 
   techStack: [
     "FastAPI",
@@ -1024,6 +1046,38 @@ export const projects: Project[] = [
   
 ];
 
+const order = [
+  "rca-root-cause-agent",
+  "uae-visa-consultancy-website",
+  "tyre-ecommerce-platform",
+  "deepfake-detection-system",
+  "revenue-os",
+  "clinic-voice-agent",
+  "ai-customer-support-agent",
+];
+const all = [...newProjects, ...existingProjects];
+export const projects: Project[] = [
+  ...order.map((slug) => all.find((p) => p.slug === slug)!).filter(Boolean),
+  ...all.filter((p) => !order.includes(p.slug)),
+];
+
 export const featuredProjects = projects.filter((p) => p.isFeatured);
 
-export const projectCategories = ["All", "AI", "Backend", "Automation", "Web"];
+/** Card/hero media: the dedicated cover if set, otherwise the project's first image, otherwise its first video. */
+export function getProjectPreview(p: Project): { type: "image" | "video"; src: string } | undefined {
+  if (p.cover) return { type: "image", src: p.cover };
+  const img = p.media?.find((m) => m.type === "image");
+  if (img) return { type: "image", src: img.src };
+  const vid = p.media?.find((m) => m.type === "video");
+  if (vid) return { type: "video", src: vid.src };
+  return undefined;
+}
+
+export const CLIENT_WORK = "Client Work";
+export const projectCategories = ["All", CLIENT_WORK, "AI", "Voice AI", "Backend", "Web", "Automation", "Data & Analytics"];
+
+export function matchesFilter(p: Project, filter: string) {
+  if (filter === "All") return true;
+  if (filter === CLIENT_WORK) return !!p.client;
+  return p.category === filter;
+}

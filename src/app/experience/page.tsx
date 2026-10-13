@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BriefcaseBusiness, GraduationCap, Sparkles } from "lucide-react";
+import { BriefcaseBusiness, GraduationCap, Sparkles, FileText } from "lucide-react";
+import { siteConfig } from "@/content/site-config";
 import { workExperiences, education } from "@/content/experience";
 import { ExperienceEntry } from "@/types";
 
@@ -64,9 +65,17 @@ export default function ExperiencePage() {
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-[#F5F1EA] mb-4">
             Career Journey
           </h1>
-          <p className="text-[#A39C90] text-base md:text-lg max-w-2xl leading-relaxed">
-            From software engineering education to building production AI systems for clients worldwide.
+          <p className="text-[#A39C90] text-base md:text-lg max-w-2xl leading-relaxed mb-5">
+            From a software engineering degree to shipping web apps, backend systems and AI products for clients worldwide.
           </p>
+          <a
+            href={siteConfig.cvPath}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(245,241,234,0.15)] text-[#F5F1EA] text-sm hover:border-[#E8734A] hover:text-[#E8734A] transition-colors"
+          >
+            <FileText size={15} strokeWidth={1.5} /> View full resume (PDF)
+          </a>
         </div>
 
         {/* Work Experience */}
