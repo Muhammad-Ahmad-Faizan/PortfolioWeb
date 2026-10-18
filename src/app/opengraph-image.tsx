@@ -1,11 +1,12 @@
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/content/site-config";
 
-export const alt = `${siteConfig.name} — ${siteConfig.title}`;
+export const alt = `${siteConfig.name} — ${siteConfig.title} · ${siteConfig.specialty}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // Link-preview card shown on LinkedIn, WhatsApp, X, Slack, etc.
+// Card version 2 (Oct 2026): editing this file gives the image a new URL, so social sites drop their cached copy.
 export default function OpengraphImage() {
   return new ImageResponse(
     (
