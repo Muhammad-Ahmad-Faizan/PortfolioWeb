@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Muhammad Ahmad Faizan",
   title: "Software Engineer",
-  specialty: "Backend & AI Systems",
+  specialty: "Web, AI & Automation",
 
   // TODO: set NEXT_PUBLIC_SITE_URL in Vercel to your real domain (used for SEO, sitemap, link previews)
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://muhammad-ahmad-faizan.vercel.app",
