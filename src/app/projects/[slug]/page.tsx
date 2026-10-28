@@ -156,7 +156,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           </Section>
 
           <Section title="Architecture">
-            <div className="bg-[#17150F] border border-[rgba(245,241,234,0.08)] rounded-lg p-4 md:p-6 overflow-x-auto">
+            <div data-reveal="wipe" className="bg-[#17150F] border border-[rgba(245,241,234,0.08)] rounded-lg p-4 md:p-6 overflow-x-auto">
               <div
                 dangerouslySetInnerHTML={{ __html: sections.architectureDiagram }}
                 className="min-w-[600px]"

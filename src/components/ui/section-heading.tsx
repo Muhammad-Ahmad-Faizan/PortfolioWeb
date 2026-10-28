@@ -12,7 +12,7 @@ export default function SectionHeading({
   return (
     <div className="mb-10 md:mb-14">
       {label && (
-        <span className="inline-block text-xs font-mono text-[#5FA8A0] uppercase tracking-wider mb-3">
+        <span className="sh-label text-xs font-mono text-[#5FA8A0] uppercase tracking-wider mb-3">
           {label}
         </span>
       )}

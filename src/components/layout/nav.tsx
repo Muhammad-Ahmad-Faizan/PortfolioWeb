@@ -23,6 +23,7 @@ import { openCommandPalette } from "@/components/layout/command-palette";
 import { navLinks } from "@/content/nav-links";
 import { siteConfig } from "@/content/site-config";
 import { cn } from "@/lib/utils";
+import Magnetic from "@/components/motion/magnetic";
 
 const iconMap: Record<string, React.ReactNode> = {
   Home: <Home size={16} strokeWidth={1.5} />,
@@ -38,11 +39,21 @@ const iconMap: Record<string, React.ReactNode> = {
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
   const ctaText = "Hire Me";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    let last = window.scrollY;
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+      // Hide while scrolling down, show again as soon as the visitor scrolls up
+      if (Math.abs(y - last) > 6) {
+        setHidden(y > last && y > 240);
+        last = y;
+      }
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -54,8 +65,9 @@ export default function Nav() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "bg-[#12110F]/90 backdrop-blur-md" : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+        scrolled ? "bg-[#12110F]/90 backdrop-blur-md border-b border-[rgba(245,241,234,0.06)]" : "bg-transparent",
+        hidden && !isOpen ? "-translate-y-full" : "translate-y-0"
       )}
     >
       <div className="section-container flex items-center justify-between h-16 md:h-[var(--nav-height)]">
@@ -70,7 +82,7 @@ export default function Nav() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-0.5 bg-[#1C1A17] border border-[rgba(245,241,234,0.08)] rounded-full px-2 py-1">
+        <nav className="relative isolate hidden lg:flex items-center gap-0.5 bg-[#1C1A17] border border-[rgba(245,241,234,0.08)] rounded-full px-2 py-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -78,12 +90,19 @@ export default function Nav() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "flex items-center gap-1.5 px-2 xl:px-2.5 py-1.5 rounded-full text-[13px] xl:text-sm whitespace-nowrap transition-all duration-200",
+                  "relative flex items-center gap-1.5 px-2 xl:px-2.5 py-1.5 rounded-full text-[13px] xl:text-sm whitespace-nowrap transition-colors duration-200",
                   isActive
-                    ? "bg-[#252220] text-[#E8734A]"
+                    ? "text-[#E8734A]"
                     : "text-[#A39C90] hover:text-[#F5F1EA] hover:bg-[#252220]/50"
                 )}
               >
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-pill"
+                    className="absolute inset-0 rounded-full bg-[#252220] -z-10"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
                 {iconMap[link.icon]}
                 <span>{link.label}</span>
               </Link>
@@ -112,6 +131,7 @@ export default function Nav() {
           <FileText size={15} strokeWidth={1.5} />
           <span className="hidden xl:inline">Resume</span>
         </a>
+        <Magnetic strength={0.25}>
         <Link
           href="/contact"
           className="inline-flex items-center gap-2 whitespace-nowrap bg-[#E8734A] hover:bg-[#E8734A]/90 text-[#12110F] px-3.5 xl:px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200"
@@ -119,6 +139,7 @@ export default function Nav() {
           <Sparkles size={14} strokeWidth={1.5} />
           <span>{ctaText}</span>
         </Link>
+        </Magnetic>
         </div>
 
         {/* Mobile Menu Button */}
@@ -142,11 +163,11 @@ export default function Nav() {
             className="lg:hidden border-t border-[rgba(245,241,234,0.08)] bg-[#1C1A17]"
           >
             <div className="section-container py-4 flex flex-col gap-1">
-              {navLinks.map((link) => {
+              {navLinks.map((link, i) => {
                 const isActive = pathname === link.href;
                 return (
+                  <motion.div key={link.href} initial={{ opacity: 0, x: -14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.04 * i, duration: 0.3 }}>
                   <Link
-                    key={link.href}
                     href={link.href}
                     className={cn(
                       "flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all duration-200",
@@ -158,6 +179,7 @@ export default function Nav() {
                     {iconMap[link.icon]}
                     <span>{link.label}</span>
                   </Link>
+                  </motion.div>
                 );
               })}
               <a

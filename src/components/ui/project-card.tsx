@@ -7,6 +7,7 @@ import SmartImage from "@/components/ui/smart-image";
 import Flag from "@/components/ui/flag";
 import { Project } from "@/types";
 import { getProjectPreview } from "@/content/projects";
+import Tilt from "@/components/motion/tilt";
 
 export default function ProjectCard({ project, headingLevel = "h3" }: { project: Project; headingLevel?: "h2" | "h3" }) {
   const ref = useRef<HTMLAnchorElement>(null);
@@ -24,6 +25,7 @@ export default function ProjectCard({ project, headingLevel = "h3" }: { project:
   };
 
   return (
+    <Tilt>
     <Link
       ref={ref}
       href={`/projects/${project.slug}`}
@@ -124,5 +126,6 @@ export default function ProjectCard({ project, headingLevel = "h3" }: { project:
         </span>
       </div>
     </Link>
+    </Tilt>
   );
 }

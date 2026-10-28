@@ -10,7 +10,7 @@ export default function FeaturedNotes() {
       <div className="section-container">
         <div className="flex items-end justify-between mb-8 md:mb-10">
           <div>
-            <span className="inline-block text-xs font-mono text-[#5FA8A0] uppercase tracking-wider mb-3">
+            <span className="sh-label text-xs font-mono text-[#5FA8A0] uppercase tracking-wider mb-3">
               Writing
             </span>
             <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#F5F1EA]">

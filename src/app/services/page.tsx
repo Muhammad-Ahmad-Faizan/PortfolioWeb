@@ -112,7 +112,7 @@ export default function ServicesPage() {
 
         {/* Process */}
         <section className="mb-20">
-          <span className="inline-block text-xs font-mono text-[#5FA8A0] uppercase tracking-wider mb-3">Process</span>
+          <span className="sh-label text-xs font-mono text-[#5FA8A0] uppercase tracking-wider mb-3">Process</span>
           <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#F5F1EA] mb-8">
             From first call to launch
           </h2>
@@ -145,7 +145,7 @@ export default function ServicesPage() {
 
         {/* FAQ */}
         <section className="mb-20 max-w-3xl">
-          <span className="inline-block text-xs font-mono text-[#5FA8A0] uppercase tracking-wider mb-3">FAQ</span>
+          <span className="sh-label text-xs font-mono text-[#5FA8A0] uppercase tracking-wider mb-3">FAQ</span>
           <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#F5F1EA] mb-8">
             Frequently asked questions
           </h2>

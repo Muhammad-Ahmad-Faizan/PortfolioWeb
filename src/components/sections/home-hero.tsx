@@ -8,6 +8,8 @@ import { ArrowRight, Sparkles, MapPin } from "lucide-react";
 import { siteConfig } from "@/content/site-config";
 import { projects } from "@/content/projects";
 import { useCountUp } from "@/hooks/use-count-up";
+import SplitWords from "@/components/motion/split-words";
+import Magnetic from "@/components/motion/magnetic";
 
 function StatItem({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   const { count, ref } = useCountUp(value);
@@ -111,9 +113,11 @@ export default function HomeHero() {
   };
 
   return (
-    <section ref={sectionRef} onMouseMove={onMove} className="pt-24 md:pt-32 pb-10 md:pb-12 relative overflow-hidden">
+    <section data-no-reveal ref={sectionRef} onMouseMove={onMove} className="pt-24 md:pt-32 pb-10 md:pb-12 relative overflow-hidden">
       <div aria-hidden className="absolute inset-0 hero-grid pointer-events-none" />
       <motion.div aria-hidden style={{ background: glow }} className="absolute inset-0 pointer-events-none hidden md:block" />
+      <div aria-hidden className="blob blob-1 -top-24 -left-20 w-[420px] h-[420px] bg-[#E8734A]/[0.10]" />
+      <div aria-hidden className="blob blob-2 top-40 right-[-120px] w-[480px] h-[480px] bg-[#5FA8A0]/[0.08]" />
       <div aria-hidden className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-[#E8734A]/[0.06] blur-3xl pointer-events-none" />
 
       <div className="section-container relative">
@@ -147,11 +151,11 @@ export default function HomeHero() {
 
             <h1 className="font-semibold tracking-tight mb-6">
               <motion.span {...rise(0.12)} className="block text-5xl md:text-6xl lg:text-7xl leading-[1.02] text-[#F5F1EA]">
-                {siteConfig.title}.
+                <span className="text-shimmer">{siteConfig.title}.</span>
               </motion.span>
-              <motion.span {...rise(0.26)} className="block mt-3 text-2xl md:text-3xl lg:text-4xl leading-tight text-[#A39C90] max-w-xl">
-                I build reliable web apps, backends and AI products.
-              </motion.span>
+              <span className="block mt-3 text-2xl md:text-3xl lg:text-4xl leading-tight text-[#A39C90] max-w-xl">
+                <SplitWords text="I build reliable web apps, backends and AI products." delay={0.3} stagger={0.05} />
+              </span>
             </h1>
 
             <motion.p {...rise(0.4)} className="text-lg text-[#A39C90] leading-relaxed max-w-xl mb-8">
@@ -160,6 +164,7 @@ export default function HomeHero() {
             </motion.p>
 
             <motion.div {...rise(0.52)} className="flex flex-wrap gap-4">
+              <Magnetic>
               <Link
                 href="/projects"
                 className="group inline-flex items-center gap-2 bg-[#E8734A] hover:bg-[#F0845C] text-[#12110F] px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:shadow-[0_8px_30px_-8px_rgba(232,115,74,0.6)]"
@@ -167,6 +172,8 @@ export default function HomeHero() {
                 <Sparkles size={16} strokeWidth={1.5} className="transition-transform group-hover:rotate-12" />
                 <span>View my work</span>
               </Link>
+              </Magnetic>
+              <Magnetic>
               <Link
                 href="/services"
                 className="group inline-flex items-center gap-2 border border-[rgba(245,241,234,0.12)] hover:border-[#E8734A]/50 text-[#F5F1EA] px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200"
@@ -174,6 +181,7 @@ export default function HomeHero() {
                 <span>Services &amp; pricing</span>
                 <ArrowRight size={16} strokeWidth={1.5} className="transition-transform group-hover:translate-x-0.5" />
               </Link>
+              </Magnetic>
             </motion.div>
 
             <motion.div {...rise(0.64)} className="flex items-center gap-2 mt-6 text-sm text-[#A39C90]">

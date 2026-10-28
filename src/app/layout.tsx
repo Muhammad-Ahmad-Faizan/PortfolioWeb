@@ -6,6 +6,10 @@ import { Analytics } from "@vercel/analytics/next";
 import Footer from "@/components/layout/footer";
 import CommandPalette from "@/components/layout/command-palette";
 import ScrollProgress from "@/components/layout/scroll-progress";
+import SmoothScroll from "@/components/motion/smooth-scroll";
+import AutoReveal from "@/components/motion/auto-reveal";
+import CursorGlow from "@/components/motion/cursor-glow";
+import BackToTop from "@/components/motion/back-to-top";
 import { siteConfig } from "@/content/site-config";
 
 const geistSans = Geist({
@@ -78,7 +82,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth dark">
+    <html lang="en" className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#12110F] text-[#F5F1EA] min-h-screen`}
       >
@@ -86,10 +90,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        <SmoothScroll />
         <ScrollProgress />
+        <CursorGlow />
         <Nav />
         <main className="min-h-screen">{children}</main>
         <Footer />
+        <BackToTop />
+        <AutoReveal />
         <CommandPalette />
         <Analytics />
       </body>

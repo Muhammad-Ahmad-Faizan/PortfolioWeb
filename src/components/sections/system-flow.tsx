@@ -32,7 +32,7 @@ export default function SystemFlow() {
       <div className="section-container">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 md:mb-10">
           <div>
-            <span className="inline-block text-xs font-mono text-[#5FA8A0] uppercase tracking-wider mb-3">
+            <span className="sh-label text-xs font-mono text-[#5FA8A0] uppercase tracking-wider mb-3">
               System in motion
             </span>
             <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#F5F1EA]">

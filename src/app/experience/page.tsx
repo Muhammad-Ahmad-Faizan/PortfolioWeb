@@ -15,14 +15,20 @@ const typeIcons: Record<string, React.ReactNode> = {
 function TimelineEntry({ exp, i }: { exp: ExperienceEntry; i: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.4, delay: i * 0.1 }}
+      initial={{ opacity: 0, x: -24 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
       className="relative pl-14"
     >
-      <div className="absolute left-3 top-1 w-4 h-4 bg-[#17150F] border-2 border-[rgba(245,241,234,0.08)] rounded-full flex items-center justify-center">
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.15 + i * 0.12 }}
+        className="absolute left-3 top-1 w-4 h-4 bg-[#17150F] border-2 border-[rgba(245,241,234,0.08)] rounded-full flex items-center justify-center">
         <div className="w-1.5 h-1.5 bg-[#E8734A] rounded-full" />
-      </div>
+      </motion.div>
       <div className="bg-[#17150F] border border-[rgba(245,241,234,0.08)] rounded-lg p-5">
         <div className="flex items-start justify-between gap-4 mb-3">
           <div>
@@ -82,6 +88,14 @@ export default function ExperiencePage() {
         <h2 className="text-xl font-semibold text-[#F5F1EA] mb-6">Experience</h2>
         <div className="relative">
           <div className="absolute left-5 top-0 bottom-0 w-px bg-[rgba(245,241,234,0.08)]" />
+          <motion.div
+            aria-hidden
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-[#E8734A] via-[#E8734A]/50 to-transparent origin-top"
+          />
           <div className="space-y-8">
             {workExperiences.map((exp, i) => (
               <TimelineEntry key={exp.id} exp={exp} i={i} />

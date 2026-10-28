@@ -189,3 +189,99 @@ code, pre, .font-mono {
   }
   .animate-marquee { animation: none; }
 }
+
+/* ================= Motion system ================= */
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+
+/* Scroll reveal (added by AutoReveal; removed again after it plays) */
+.ar {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--ar-d, 0ms),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--ar-d, 0ms),
+    clip-path 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--ar-d, 0ms);
+  will-change: opacity, transform;
+}
+.ar.ar-h { clip-path: inset(0 0 100% 0); transform: translate3d(0, 18px, 0); }
+.ar.ar-card { transform: translate3d(0, 40px, 0) scale(0.97); }
+.ar.ar-wipe { opacity: 1; transform: none; clip-path: inset(0 100% 0 0); transition-duration: 0.4s, 0.4s, 1.4s; }
+.ar.ar-in { opacity: 1; transform: none; clip-path: inset(0 0 -20% 0); }
+.ar.ar-wipe.ar-in { clip-path: inset(0 0 0 0); }
+
+/* Section labels: a short line draws in before the text */
+.sh-label { display: inline-flex; align-items: center; gap: 0.6rem; }
+.sh-label::before {
+  content: ""; width: 1.4rem; height: 1px; background: currentColor; opacity: 0.8;
+  transform-origin: left; animation: lineIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes lineIn { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Shine sweep across primary (orange) buttons on hover */
+a[class*="bg-[#E8734A]"], button[class*="bg-[#E8734A]"] { position: relative; overflow: hidden; isolation: isolate; }
+a[class*="bg-[#E8734A]"]::after, button[class*="bg-[#E8734A]"]::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+a[class*="bg-[#E8734A]"]:hover::after, button[class*="bg-[#E8734A]"]:hover::after { transform: translateX(120%); }
+a[class*="bg-[#E8734A]"]:active, button[class*="bg-[#E8734A]"]:active { transform: scale(0.97); }
+
+/* Lift for clickable panels and pills (cards with their own tilt are excluded) */
+main a.rounded-lg:not(.spotlight-card), main a.rounded-xl:not(.spotlight-card), main a.rounded-full {
+  transition-property: transform, color, background-color, border-color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+main a.rounded-lg:not(.spotlight-card):hover, main a.rounded-xl:not(.spotlight-card):hover { transform: translateY(-3px); box-shadow: 0 18px 40px -22px rgba(232, 115, 74, 0.45); }
+main a.rounded-full:hover { transform: translateY(-1px); }
+
+/* Static panels respond on hover with a soft border glow */
+main div.rounded-lg[class*="border"], main div.rounded-xl[class*="border"] {
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+main div.rounded-lg[class*="border"]:hover, main div.rounded-xl[class*="border"]:hover {
+  border-color: rgba(232, 115, 74, 0.28);
+  box-shadow: 0 0 0 1px rgba(232, 115, 74, 0.06), 0 20px 50px -30px rgba(232, 115, 74, 0.35);
+}
+
+/* Tech pills float up on hover */
+main span.rounded-full[class*="font-mono"] { transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease; }
+main span.rounded-full[class*="font-mono"]:hover { transform: translateY(-2px); background-color: #2E2A26; color: #F5F1EA; }
+
+/* Hero: drifting light blobs */
+@keyframes drift1 { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(60px,40px,0) scale(1.15); } }
+@keyframes drift2 { 0%,100% { transform: translate3d(0,0,0) scale(1.1); } 50% { transform: translate3d(-70px,-30px,0) scale(0.95); } }
+.blob { position: absolute; border-radius: 9999px; filter: blur(70px); pointer-events: none; will-change: transform; }
+.blob-1 { animation: drift1 16s ease-in-out infinite; }
+.blob-2 { animation: drift2 20s ease-in-out infinite; }
+
+/* Gradient text that slowly shifts */
+@keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.text-shimmer {
+  background: linear-gradient(90deg, #F5F1EA 0%, #E8734A 35%, #F5B38F 55%, #F5F1EA 80%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+/* Gentle floating (tech logos, badges) */
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+.floaty { animation: floaty 4s ease-in-out infinite; }
+
+/* Pulsing ring for "available" dots */
+@keyframes ringPulse { 0% { box-shadow: 0 0 0 0 rgba(95,168,160,0.5); } 100% { box-shadow: 0 0 0 10px rgba(95,168,160,0); } }
+
+/* Images inside reveals zoom out slightly as they appear */
+.ar-card img { transform: scale(1.08); transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+.ar-card.ar-in img { transform: scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ar { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .blob-1, .blob-2, .text-shimmer, .floaty, .sh-label::before { animation: none !important; }
+}
